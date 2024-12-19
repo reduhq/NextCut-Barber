@@ -6,7 +6,7 @@ export default function App() {
   return (
     <View style={styles.container} className='mt-[3rem]'>
       <Text className='text-red-500'>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+      {/* <StatusBar style="auto" /> */}
     </View>
   );
 }
