@@ -4,13 +4,25 @@ import { Pressable, View } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useColorScheme } from "nativewind";
 import "../global.css";
+import { useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Layout() {
-  const {colorScheme} = useColorScheme()
+  const {colorScheme, setColorScheme} = useColorScheme()
   const haderBackgroudColor = colorScheme == 'dark' ? "#1F1F1F" : "#F4F4F9" 
   const headerTextColor = colorScheme == "dark" ? "#FFFFFF" : "#1F1F1F"
+
+  useEffect(()=>{
+    const loadColorScheme = async ()=>{
+      const scheme = await AsyncStorage.getItem("colorScheme") 
+      if(scheme) setColorScheme(scheme as "light"|"dark"|"system")
+      else setColorScheme("system")
+    }
+    loadColorScheme()
+  }, [])
+
   return (
-    <View className="bg-red-600 h-full">
+    <View className="h-full">
       <StatusBar />
       <Stack
         screenOptions={{
