@@ -7,7 +7,25 @@ module.exports = {
   ],
   presets: [require("nativewind/preset")],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        // Background
+        "light-bg": "#F4F4F9",
+        "dark-bg": "#1F1F1F",
+        // Text
+        "primary-light-text": "#1F1F1F",
+        "primary-dark-text": "#FFFFFF",
+        "secondary-light-text:": "#6D6D6D",
+        "secondary-dark-text": "#B0B0B0",
+        // Cards
+        "card-light-bg": "#FFFFFF",
+        "card-dark-bg": "#2B2B2B",
+        // App Colors
+        "red": "#E63946",
+        "green": "#2A9D8F"
+
+      }
+    },
   },
   plugins: [],
 }
