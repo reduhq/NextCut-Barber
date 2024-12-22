@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .bg-theme {
+    @apply bg-light-bg dark:bg-dark-bg;
+  }
+
+  .text-primary {
+    @apply text-primary-light-text dark:text-primary-dark-text;
+  }
+
+  .text-secondary {
+    @apply text-secondary-light-text dark:text-secondary-dark-text;
+  }
+
+  .bg-card {
+    @apply bg-card-light-bg dark:bg-card-dark-bg;
+  }
+}
