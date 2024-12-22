@@ -1,7 +1,5 @@
-import { Link, Slot, Stack } from "expo-router";
+import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { Pressable, View } from "react-native";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useColorScheme } from "nativewind";
 import "../global.css";
 import { useEffect } from "react";
@@ -22,26 +20,11 @@ export default function Layout() {
   }, []);
 
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-    </Stack>
-    // <>
-    //   <StatusBar />
-    //   <Slot/>
-    //   <Stack
-    //     screenOptions={{
-    //       headerTitle: "NextCut",
-    //       headerTintColor: headerTextColor,
-    //       headerStyle: {backgroundColor: haderBackgroudColor},
-    //       headerRight: () => (
-    //         <Link asChild href="/settings">
-    //           <Pressable>
-    //             <MaterialIcons name="settings" size={24} color="black" />
-    //           </Pressable>
-    //         </Link>
-    //       ),
-    //     }}
-    //   />
-    // </>
+    <>
+      <StatusBar />
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack>
+    </>
   );
 }

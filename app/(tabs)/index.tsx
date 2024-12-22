@@ -1,25 +1,41 @@
 import { MaterialIcons } from "@expo/vector-icons";
+import { useHeaderHeight } from "@react-navigation/elements";
 import { Link, Stack } from "expo-router";
 import React from "react";
 import { Pressable, Text, View } from "react-native";
 
 const Index = () => {
+  const headerHeight = useHeaderHeight();
+
   return (
-    <View className="px-[.5rem] bg-[#F4F4F9] dark:bg-[#1F1F1F] h-full">
+    <>
       <Stack.Screen
         options={{
-          headerTitle: "Configuración",
-          headerRight: () => null,
-        }}
-      />
-      <Text className="text-red-600">Hola reduhq</Text>
-      
-      <Link asChild href="/settings">
+          headerTransparent: true,
+          headerTitle: "",
+          headerLeft: () => (
+            <View className="pl-[.5rem]">
+              <Text className="text-[1rem]">Buenos Días! 👋👋</Text>
+              <Text className="font-bold text-[2rem]">Rey Halsall</Text>
+            </View>
+          ),
+          headerRight: () => (
+            <Link asChild href="/settings" className="pr-[.5rem] text-sm">
               <Pressable>
                 <MaterialIcons name="settings" size={24} color="black" />
               </Pressable>
             </Link>
-    </View>
+          ),
+        }}
+      />
+      <View
+        style={{ paddingTop: headerHeight }}
+        className="container bg-light-bg dark:bg-dark-bg"
+      >
+        <Text>Resumen del Día</Text>
+        <Text>8 Citas Restantes</Text>
+      </View>
+    </>
   );
 };
 

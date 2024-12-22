@@ -7,6 +7,10 @@ module.exports = {
   ],
   presets: [require("nativewind/preset")],
   theme: {
+    container:{
+      center: true,
+      padding: ".5rem"
+    },
     extend: {
       colors:{
         // Background
