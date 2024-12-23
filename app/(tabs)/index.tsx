@@ -1,7 +1,7 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { Link, Stack } from "expo-router";
 import React from "react";
-import { Pressable, Text, TouchableOpacity, View } from "react-native";
+import { Pressable, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { useColorScheme } from "nativewind";
 
@@ -42,13 +42,14 @@ const Index = () => {
           ),
         }}
       />
+      {/* main content */}
       <View style={{ paddingTop: headerHeight }} className="container bg-theme">
         <View className="bg-card p-[1rem] rounded-xl shadow-xl">
           <Text className="text-secondary mb-[1rem]">Resumen del Día</Text>
           <Text className="text-primary text-[2rem] mb-[.5rem] font-bold">
             8 Citas Restantes
           </Text>
-          {/* siguiente cita */}
+          {/* next appointment */}
           <View className="flex-row bg-theme p-[1rem] rounded-lg">
             <View className="flex-1 justify-center ml-[.5rem]">
               <Text className="text-primary">Siguiente: Rey Halsall</Text>
@@ -63,6 +64,18 @@ const Index = () => {
             </Pressable>
           </View>
         </View>
+        {/* labels */}
+        <ScrollView horizontal contentContainerStyle={{ gap: 10}} className="mt-[1rem]">
+          <Pressable className="bg-green px-[1rem] py-[.1rem] rounded-full">
+            <Text className="text-white">En progreso</Text>
+          </Pressable>
+          <Pressable className="bg-blue px-[1rem] py-[.1rem] rounded-full">
+            <Text className="text-white">Siguientes citas</Text>
+          </Pressable>
+          <Pressable className="bg-red px-[1rem] py-[.1rem] rounded-full">
+            <Text className="text-white">Canceladas</Text>
+          </Pressable>
+        </ScrollView>
       </View>
     </>
   );
