@@ -43,23 +43,24 @@ const Index = () => {
         }}
       />
       <View style={{ paddingTop: headerHeight }} className="container bg-theme">
-        <View className="bg-card p-[2rem] rounded-xl  gap-[1rem] shadow-xl">
-          <Text className="text-primary text-[1.5rem]">Resumen del Día</Text>
-          <Text className="text-green text-[2rem] font-bold">
+        <View className="bg-card p-[1rem] rounded-xl shadow-xl">
+          <Text className="text-secondary mb-[1rem]">Resumen del Día</Text>
+          <Text className="text-primary text-[2rem] mb-[.5rem] font-bold">
             8 Citas Restantes
           </Text>
-          <View className="flex-row ">
-            <Pressable className="p-[1rem] rounded-full bg-theme">
+          {/* siguiente cita */}
+          <View className="flex-row bg-theme p-[1rem] rounded-lg">
+            <View className="flex-1 justify-center ml-[.5rem]">
+              <Text className="text-primary">Siguiente: Rey Halsall</Text>
+              <Text className="text-secondary">10:30 AM</Text>
+            </View>
+            <Pressable className="justify-center">
               <MaterialIcons
                 name="more-horiz"
                 size={24}
                 color={`${colorScheme == "dark" ? "#FFFFFF" : "#1F1F1F"}`}
               />
             </Pressable>
-            <View className="flex-1 justify-center ml-[.5rem]">
-              <Text className="text-primary">Siguiente: Rey Halsall</Text>
-              <Text className="text-secondary">10:30 AM</Text>
-            </View>
           </View>
         </View>
       </View>
