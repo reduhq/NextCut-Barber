@@ -1,6 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { Link, Stack } from "expo-router";
-import React from "react";
+import React, { useEffect } from "react";
 import { Pressable, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { useColorScheme } from "nativewind";
@@ -28,7 +28,7 @@ const Index = () => {
           headerRight: () => (
             <Link
               asChild
-              href="/settings"
+              href="/profile/settings"
               className="mr-[1rem] px-[.5rem] py-[.35rem] rounded-lg shadow-2xl bg-card"
             >
               <Pressable>
@@ -43,7 +43,7 @@ const Index = () => {
         }}
       />
       {/* main content */}
-      <View style={{ paddingTop: headerHeight }} className="container bg-theme">
+      <View style={{ paddingTop: headerHeight }} className="container bg-theme h-full">
         <View className="bg-card p-[1rem] rounded-xl shadow-xl">
           <Text className="text-secondary mb-[1rem]">Resumen del Día</Text>
           <Text className="text-primary text-[2rem] mb-[.5rem] font-bold">

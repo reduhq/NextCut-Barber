@@ -24,6 +24,15 @@ export default function Layout() {
       <StatusBar />
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="modal"
+          options={{
+            headerShown: false,
+            animation: "slide_from_bottom",
+            presentation: "modal",
+            title: "My Modal",
+          }}
+        />
       </Stack>
     </>
   );

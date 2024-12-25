@@ -1,7 +1,7 @@
-import { Tabs } from "expo-router";
+import { router, Tabs } from "expo-router";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useColorScheme } from "nativewind";
-import { View } from "react-native";
+import { Button, Modal, Text, View } from "react-native";
 
 export default function Layout() {
   const { colorScheme } = useColorScheme();
@@ -17,9 +17,9 @@ export default function Layout() {
         },
         tabBarShowLabel: false,
         tabBarActiveTintColor: "#a186eb",
-        tabBarItemStyle:{
-          top: 5
-        }
+        tabBarItemStyle: {
+          top: 5,
+        },
       }}
     >
       <Tabs.Screen
@@ -47,6 +47,13 @@ export default function Layout() {
             </View>
           ),
         }}
+
+        listeners={({navigation}) => ({
+          tabPress: (e) => {
+            e.preventDefault();
+            router.push("modal");
+          },
+        })}
       />
       <Tabs.Screen
         name="calendar"
