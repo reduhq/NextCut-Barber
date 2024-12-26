@@ -1,9 +1,8 @@
-import { router, Stack } from "expo-router";
-import React, { useEffect, useState } from "react";
-import { Modal, Pressable, Text, View } from "react-native";
-import { useHeaderHeight } from "@react-navigation/elements";
+import { router } from "expo-router";
+import React, { useState } from "react";
+import { Pressable, Text, View } from "react-native";
 import Constants from "expo-constants";
-import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
+import DatePicker, { getFormatedDate } from "./../react-native-modern-datepicker";
 import { useColorScheme } from "nativewind";
 
 const CreateNewAppointment = () => {
@@ -40,7 +39,7 @@ const CreateNewAppointment = () => {
           mode="calendar"
           minimumDate={startDate}
           selected={selectedDate}
-          onDateChange={(date)=>{
+          onDateChange={(date) =>{
             setSelectedDate(date)
           }}
           options={{
