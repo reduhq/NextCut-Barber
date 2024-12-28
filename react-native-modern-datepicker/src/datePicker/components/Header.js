@@ -4,7 +4,7 @@ import {View, TouchableOpacity, Text, Image, StyleSheet, Animated, I18nManager} 
 
 // import {useCalendar} from '../CalendarHook';
 
-const Header = ({changeMonth,  useCalendar}) => {
+const Header = ({changeMonth = () => null,  useCalendar}) => {
   const {
     options,
     disableDateChange,
@@ -202,9 +202,9 @@ const styles = (theme) =>
     },
   });
 
-Header.defaultProps = {
-  changeMonth: () => null,
-};
+// Header.defaultProps = {
+//   changeMonth: () => null,
+// };
 
 Header.propTypes = {
   changeMonth: PropTypes.func,
