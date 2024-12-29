@@ -14,7 +14,7 @@ import {
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
-const TimeScroller = ({title, data, onChange}) => {
+const TimeScroller = ({title, data, onChange, useCalendar}) => {
   const {options, utils} = useCalendar();
   const [itemSize, setItemSize] = useState(0);
   const style = styles(options);
@@ -188,11 +188,13 @@ const SelectTime = ({ useCalendar }) => {
         title={utils.config.hour}
         data={Array.from({length: 24}, (x, i) => i)}
         onChange={hour => setTime({...time, hour})}
+        useCalendar={useCalendar}
       />
       <TimeScroller
         title={utils.config.minute}
         data={Array.from({length: 60 / minuteInterval}, (x, i) => i * minuteInterval)}
         onChange={minute => setTime({...time, minute})}
+        useCalendar={useCalendar}
       />
       <View style={style.footer}>
         <TouchableOpacity style={style.button} activeOpacity={0.8} onPress={selectTime}>

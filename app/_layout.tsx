@@ -28,9 +28,9 @@ export default function Layout() {
           name="modal"
           options={{
             headerShown: false,
-            // animation: "slide_from_bottom",
-            // animationDuration: 500,
-            presentation: "formSheet",
+            animation: "slide_from_bottom",
+            // animationDuration: 2000,
+            presentation: "modal",
             title: "My Modal",
           }}
         />

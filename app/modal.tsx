@@ -2,20 +2,15 @@ import { router } from "expo-router";
 import React, { useState } from "react";
 import { Pressable, Text, View } from "react-native";
 import Constants from "expo-constants";
-import DatePicker, { getFormatedDate } from "./../react-native-modern-datepicker";
 import { useColorScheme } from "nativewind";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const CreateNewAppointment = () => {
   const headerHeight = Constants.statusBarHeight;
-    const { colorScheme } = useColorScheme();
-    const bgColor = colorScheme == "dark" ? "#14151a" : "#F4F4F9";
-    const textHeaderColor = colorScheme == "dark" ? "#FFFFFF" : "#1F1F1F";
-    const textDefaultColor = colorScheme == "dark" ? "#FFFFFF" : "#1F1F1F";
-
-  // date values
-  const today = new Date();
-  const startDate = getFormatedDate(today, "YYYY/MM/DD");
-  const [selectedDate, setSelectedDate] = useState(startDate);
+  const { colorScheme } = useColorScheme();
+  const bgColor = colorScheme == "dark" ? "#14151a" : "#F4F4F9";
+  const textHeaderColor = colorScheme == "dark" ? "#FFFFFF" : "#1F1F1F";
+  const textDefaultColor = colorScheme == "dark" ? "#FFFFFF" : "#1F1F1F";
 
   return (
     <>
@@ -33,26 +28,9 @@ const CreateNewAppointment = () => {
             <Text className="text-white">Cancelar</Text>
           </Pressable>
         </View>
-
-        {/* form */}
-        <DatePicker
-          mode="calendar"
-          minimumDate={startDate}
-          selected={selectedDate}
-          onDateChange={(date) =>{
-            setSelectedDate(date)
-          }}
-          options={{
-            backgroundColor: bgColor,
-            textHeaderColor: textHeaderColor,
-            textDefaultColor: textDefaultColor,
-            // selectedTextColor: "#1f2022",
-            mainColor: "#60A5FA",
-            // textSecondaryColor: "#60A5FA",
-            // borderColor:"transparent",
-            // textSecondaryColor: "red"
-          }}
-        />
+        <View style={{ backgroundColor: "red" }}>
+          <DateTimePicker mode="date" value={new Date()}/>
+        </View>
       </View>
     </>
   );

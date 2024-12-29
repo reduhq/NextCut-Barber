@@ -1,6 +1,7 @@
 import { Pressable, Text, View } from "react-native";
 import { useColorScheme } from "nativewind";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Stack } from "expo-router";
 
 const settings = () => {
   const { setColorScheme } = useColorScheme();
@@ -12,6 +13,7 @@ const settings = () => {
 
   return (
     <>
+      <Stack.Screen options={{ animation: "slide_from_right", animationDuration:10 }} />
       <View className="px-[.5rem] bg-[#F4F4F9] dark:bg-[#1F1F1F] h-full">
         <Text>Settings</Text>
         <View className="flex flex-row">

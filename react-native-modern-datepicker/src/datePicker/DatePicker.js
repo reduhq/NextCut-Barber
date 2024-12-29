@@ -44,8 +44,8 @@ const useCalendar = () => {
 const DatePicker = ({
   onSelectedChange = () => null,
   onMonthYearChange = () => null,
-  onTimeChange = () => null,
-onDateChange = (date) => {},
+  onTimeChange = (selectedTime) => {},
+  onDateChange = (date) => {},
   current = '',
   selected = '',
   minimumDate = '',
