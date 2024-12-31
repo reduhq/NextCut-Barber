@@ -2,6 +2,7 @@ import { router, Stack } from "expo-router";
 import React, { useState } from "react";
 import {
   Image,
+  ImageBackground,
   Pressable,
   ScrollView,
   Text,
@@ -20,6 +21,8 @@ import Animated, {
   useScrollViewOffset,
 } from "react-native-reanimated";
 import { BlurView, BlurViewProps } from "expo-blur";
+import { MaterialIcons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 
 const IMG_HEIGHT = 300;
 
@@ -157,6 +160,9 @@ const CreateNewAppointment = () => {
     };
   });
 
+  const AnimatedImageBackground =
+    Animated.createAnimatedComponent(ImageBackground);
+
   // const headerAnimatedStyle = useAnimatedStyle(() => {
   //   return {
   //     opacity: interpolate(scrollOffset.value, [0, IMG_HEIGHT / 2], [0, 0.6]),
@@ -202,12 +208,38 @@ const CreateNewAppointment = () => {
         }}
       /> */}
       <Animated.ScrollView ref={scrollRef} scrollEventThrottle={16}>
-        <Animated.Image
+        <AnimatedImageBackground
+          source={require("./../assets/barber-banner.png")}
+          className={`w-full bg-black`}
+          style={[{ height: IMG_HEIGHT }, imageAnimatedStyle]}
+        >
+          <LinearGradient
+            // Background Linear Gradient
+            colors={["rgba(0,0,0,0.1)", "rgba(0,0,0,0.3)", "rgba(0,0,0,0.8)"]}
+            className="h-full"
+          >
+            <View style={{ paddingTop: headerHeight }} className=" container">
+              <Pressable
+                className="mt-[.5rem] px-[.6rem] py-[.5rem] bg-card self-start rounded-lg"
+                onPress={() => {
+                  router.back();
+                }}
+              >
+                <MaterialIcons
+                  name="arrow-back"
+                  size={20}
+                  color={textDefaultColor}
+                />
+              </Pressable>
+            </View>
+          </LinearGradient>
+        </AnimatedImageBackground>
+        {/* <Animated.Image
           source={require("./../assets/barber-banner.png")}
           className={`w-full`}
           style={[{ height: IMG_HEIGHT }, imageAnimatedStyle]}
-        />
-        {/* <BlurView experimentalBlurMethod="dimezisBlurView" intensity={10} tint="dark" className="absolute h-[10rem] w-[10rem]" /> */}
+        /> */}
+
         <View className="h-[100rem] bg-black"></View>
       </Animated.ScrollView>
     </View>
