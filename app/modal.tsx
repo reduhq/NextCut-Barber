@@ -23,6 +23,13 @@ import Animated, {
 import { BlurView, BlurViewProps } from "expo-blur";
 import { MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import {
+  addDays,
+  eachDayOfInterval,
+  eachWeekOfInterval,
+  subDays,
+} from "date-fns";
+import PagerView from "react-native-pager-view";
 
 const IMG_HEIGHT = 300;
 
@@ -183,6 +190,23 @@ const CreateNewAppointment = () => {
   //   };
   // });
 
+  const dates = eachWeekOfInterval(
+    {
+      start: new Date(),
+      end: addDays(new Date(), 14),
+    },
+    {
+      weekStartsOn: 1,
+    }
+  ).reduce((acc: Date[][], cur) => {
+    const allDays = eachDayOfInterval({
+      start: cur,
+      end: addDays(cur, 6),
+    });
+    acc.push(allDays);
+    return acc;
+  }, []);
+
   return (
     <View>
       {/* <Stack.Screen
@@ -220,7 +244,7 @@ const CreateNewAppointment = () => {
           >
             <View style={{ paddingTop: headerHeight }} className=" container">
               <Pressable
-                className="mt-[.5rem] px-[.6rem] py-[.5rem] bg-card self-start rounded-lg"
+                className="mt-[.5rem] px-[.6rem] py-[.5rem] bg-theme self-start rounded-lg"
                 onPress={() => {
                   router.back();
                 }}
@@ -239,8 +263,32 @@ const CreateNewAppointment = () => {
           className={`w-full`}
           style={[{ height: IMG_HEIGHT }, imageAnimatedStyle]}
         /> */}
-
-        <View className="h-[100rem] bg-black"></View>
+        {/* Crear Cita */}
+        <View className="h-[100rem] bg-theme container rounded-t-2xl -mt-[1rem]">
+          <Text className="text-primary text-[2.5rem] text-center my-[1rem] font-bold">
+            Crear Cita
+          </Text>
+          <PagerView style={{ flex: 1 }}>
+            {dates.map((week, i) => (
+              <View key={i} className="flex-row gap-[.5rem]">
+                {week.map((day, i) => (
+                  <Pressable key={i} className="flex-1 bg-[#d3fd55] py-[1rem] rounded-2xl ">
+                    <Text className="text-secondary text-center capitalize">
+                      {Intl.DateTimeFormat("es-ES", {
+                        weekday: "short",
+                      }).format(day)}
+                    </Text>
+                    <Text className="text-primary text-center font-bold text-[1.2rem]">
+                      {Intl.DateTimeFormat("es-ES", { day: "2-digit" }).format(
+                        day
+                      )}
+                    </Text>
+                  </Pressable>
+                ))}
+              </View>
+            ))}
+          </PagerView>
+        </View>
       </Animated.ScrollView>
     </View>
   );
