@@ -8,6 +8,7 @@ import {
   Text,
   TextInput,
   View,
+  FlatList,
 } from "react-native";
 import Constants from "expo-constants";
 import { useColorScheme } from "nativewind";
@@ -30,6 +31,7 @@ import {
   subDays,
 } from "date-fns";
 import PagerView from "react-native-pager-view";
+import { opacity } from "react-native-reanimated/lib/typescript/Colors";
 
 const IMG_HEIGHT = 300;
 
@@ -207,8 +209,10 @@ const CreateNewAppointment = () => {
     return acc;
   }, []);
 
+  const [activeDate, setActiveDate] = useState("");
+
   return (
-    <View>
+    <View className="h-full">
       {/* <Stack.Screen
         options={{
           headerTitle: "Crear Cita",
@@ -231,10 +235,14 @@ const CreateNewAppointment = () => {
           ),
         }}
       /> */}
-      <Animated.ScrollView ref={scrollRef} scrollEventThrottle={16}>
+      <Animated.ScrollView
+        ref={scrollRef}
+        scrollEventThrottle={16}
+        className="bg-theme"
+      >
         <AnimatedImageBackground
           source={require("./../assets/barber-banner.png")}
-          className={`w-full bg-black`}
+          className={`w-full`}
           style={[{ height: IMG_HEIGHT }, imageAnimatedStyle]}
         >
           <LinearGradient
@@ -264,21 +272,41 @@ const CreateNewAppointment = () => {
           style={[{ height: IMG_HEIGHT }, imageAnimatedStyle]}
         /> */}
         {/* Crear Cita */}
-        <View className="h-[100rem] bg-theme container rounded-t-2xl -mt-[1rem]">
+        <View className=" bg-theme container rounded-t-2xl -mt-[1rem] ">
           <Text className="text-primary text-[2.5rem] text-center my-[1rem] font-bold">
             Crear Cita
           </Text>
-          <PagerView style={{ flex: 1 }}>
+          {/* Fecha */}
+          <Text className="uppercase text-secondary mb-[.5rem]">fecha</Text>
+          <PagerView style={{ flex: 1, height:70}}>
             {dates.map((week, i) => (
-              <View key={i} className="flex-row gap-[.5rem]">
+              <View key={i} className="flex-row gap-[.5rem]" collapsable>
                 {week.map((day, i) => (
-                  <Pressable key={i} className="flex-1 bg-[#d3fd55] py-[1rem] rounded-2xl ">
-                    <Text className="text-secondary text-center capitalize">
+                  <Pressable
+                    onPress={() => setActiveDate(i.toString())}
+                    key={i}
+                    className={`flex-1 py-[1rem] rounded-2xl ${
+                      activeDate == i.toString() ? "bg-[#d3fd55]" : "bg-card"
+                    }`}
+                  >
+                    <Text
+                      className={`text-center capitalize ${
+                        activeDate == i.toString()
+                          ? "text-secondary-light-text"
+                          : "text-secondary"
+                      }`}
+                    >
                       {Intl.DateTimeFormat("es-ES", {
                         weekday: "short",
                       }).format(day)}
                     </Text>
-                    <Text className="text-primary text-center font-bold text-[1.2rem]">
+                    <Text
+                      className={`text-center font-bold text-[1.2rem] ${
+                        activeDate == i.toString()
+                          ? "text-primary-light-text"
+                          : "text-primary"
+                      }`}
+                    >
                       {Intl.DateTimeFormat("es-ES", { day: "2-digit" }).format(
                         day
                       )}
@@ -288,6 +316,34 @@ const CreateNewAppointment = () => {
               </View>
             ))}
           </PagerView>
+          {/* Hora */}
+          <Text className="uppercase text-secondary my-[.5rem]">hora</Text>
+          <FlatList
+            className=""
+            scrollEnabled={false}
+            columnWrapperStyle={{gap: 10}}
+            numColumns={2}
+            data={[
+              "8:00 am",
+              "8:30 am",
+              "9:00 am",
+              "8:00 am",
+              "9:30 am",
+              "10:00 am",
+              "10:30 am",
+              "11:00 am",
+              "11:30 am",
+            ]}
+            keyExtractor={(item, i) => i.toString()}
+            renderItem={({ item }: { item: string }) => (
+              <Pressable className=" bg-card py-[1rem] flex-1 rounded-xl">
+                <Text className=" text-primary font-bold text-center">{item}</Text>
+              </Pressable>
+            )}
+            contentContainerStyle={{
+              gap: 10
+            }}
+          />
         </View>
       </Animated.ScrollView>
     </View>
