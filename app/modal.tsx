@@ -28,6 +28,7 @@ import {
   addDays,
   eachDayOfInterval,
   eachWeekOfInterval,
+  startOfToday,
   subDays,
 } from "date-fns";
 import PagerView from "react-native-pager-view";
@@ -280,18 +281,19 @@ const CreateNewAppointment = () => {
           <Text className="uppercase text-secondary mb-[.5rem]">fecha</Text>
           <PagerView style={{ flex: 1, height:70}}>
             {dates.map((week, i) => (
-              <View key={i} className="flex-row gap-[.5rem]" collapsable>
-                {week.map((day, i) => (
+              <View key={i} className="flex-row gap-[.5rem]">
+                {week.map((day) => (
                   <Pressable
-                    onPress={() => setActiveDate(i.toString())}
-                    key={i}
+                    onPress={() => setActiveDate(day.toString())}
+                    disabled={new Date(day) < startOfToday()}
+                    key={day.toString()}
                     className={`flex-1 py-[1rem] rounded-2xl ${
-                      activeDate == i.toString() ? "bg-[#d3fd55]" : "bg-card"
-                    }`}
+                      activeDate == day.toString() ? "bg-[#d3fd55]" : "bg-card"
+                    } ${new Date(day) < startOfToday() && 'opacity-25'}`} 
                   >
                     <Text
                       className={`text-center capitalize ${
-                        activeDate == i.toString()
+                        activeDate == day.toString()
                           ? "text-secondary-light-text"
                           : "text-secondary"
                       }`}
@@ -302,7 +304,7 @@ const CreateNewAppointment = () => {
                     </Text>
                     <Text
                       className={`text-center font-bold text-[1.2rem] ${
-                        activeDate == i.toString()
+                        activeDate == day.toString()
                           ? "text-primary-light-text"
                           : "text-primary"
                       }`}
