@@ -210,7 +210,7 @@ const CreateNewAppointment = () => {
     return acc;
   }, []);
 
-  const [activeDate, setActiveDate] = useState("");
+  const [activeDate, setActiveDate] = useState(startOfToday().toString());
 
   return (
     <View className="h-full">
@@ -265,6 +265,28 @@ const CreateNewAppointment = () => {
                 />
               </Pressable>
             </View>
+            <View className="container flex-1 justify-end flex-row gap-[.5rem] pb-[2.5rem]">
+              <View className="self-end flex-row justify-center items-center gap-[.5rem] px-[.5rem] py-[.2rem] rounded-full bg-[#d3fd55]">
+                <MaterialIcons
+                  name="access-time-filled"
+                  size={20}
+                  color="#062f06"
+                />
+                <Text className="text-[#062f06] font-bold text-[1.3rem]">
+                  11:00 Am
+                </Text>
+              </View>
+              <View className="self-end flex-row justify-center items-center gap-[.5rem] px-[.5rem] py-[.2rem] rounded-full bg-theme">
+                <MaterialIcons
+                  name="calendar-month"
+                  size={20}
+                  color={textDefaultColor}
+                />
+                <Text className="text-primary font-bold text-[1.3rem]">
+                  {Intl.DateTimeFormat('es-ES', {day: "2-digit", month: 'long', year: 'numeric'}).format(new Date(activeDate)).toString()}
+                </Text>
+              </View>
+            </View>
           </LinearGradient>
         </AnimatedImageBackground>
         {/* <Animated.Image
@@ -279,7 +301,7 @@ const CreateNewAppointment = () => {
           </Text>
           {/* Fecha */}
           <Text className="uppercase text-secondary mb-[.5rem]">fecha</Text>
-          <PagerView style={{ flex: 1, height:70}}>
+          <PagerView style={{ flex: 1, height: 70 }}>
             {dates.map((week, i) => (
               <View key={i} className="flex-row gap-[.5rem]">
                 {week.map((day) => (
@@ -289,7 +311,7 @@ const CreateNewAppointment = () => {
                     key={day.toString()}
                     className={`flex-1 py-[1rem] rounded-2xl ${
                       activeDate == day.toString() ? "bg-[#d3fd55]" : "bg-card"
-                    } ${new Date(day) < startOfToday() && 'opacity-25'}`} 
+                    } ${new Date(day) < startOfToday() && "opacity-25"}`}
                   >
                     <Text
                       className={`text-center capitalize ${
@@ -323,7 +345,7 @@ const CreateNewAppointment = () => {
           <FlatList
             className=""
             scrollEnabled={false}
-            columnWrapperStyle={{gap: 10}}
+            columnWrapperStyle={{ gap: 10 }}
             numColumns={2}
             data={[
               "8:00 am",
@@ -339,11 +361,13 @@ const CreateNewAppointment = () => {
             keyExtractor={(item, i) => i.toString()}
             renderItem={({ item }: { item: string }) => (
               <Pressable className=" bg-card py-[1rem] flex-1 rounded-xl">
-                <Text className=" text-primary font-bold text-center">{item}</Text>
+                <Text className=" text-primary font-bold text-center">
+                  {item}
+                </Text>
               </Pressable>
             )}
             contentContainerStyle={{
-              gap: 10
+              gap: 10,
             }}
           />
         </View>
