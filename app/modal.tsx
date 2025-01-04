@@ -47,105 +47,7 @@ const CreateNewAppointment = () => {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openClock, setOpenClock] = useState(false);
 
-  // return (
-  //   <>
-  //     <View style={{ paddingTop: headerHeight }} className="bg-theme container h-full">
-  //       <View className="p-[1.5rem]">
-  //         <Text className="text-primary self-center text-[1.5rem] font-bold">
-  //           Nueva Cita
-  //         </Text>
-  //         <Pressable
-  //           onPress={() => {
-  //             router.back();
-  //           }}
-  //           className="bg-red absolute self-end  mt-[1rem] right-[1rem] px-[1rem] py-[.5rem] rounded-md"
-  //         >
-  //           <Text className="text-white">Cancelar</Text>
-  //         </Pressable>
-  //       </View>
-  //       {/* Form */}
-  //       <View className="gap-[1rem] mt-[.5rem]">
-  //         <View className="gap-[.5rem]">
-  //           <Text className="text-primary">Nombre cliente (Opcional)</Text>
-  //           <TextInput
-  //             className="bg-card text-primary rounded-md px-[1rem] py-[.5rem]"
-  //             placeholder="Cliente"
-  //             placeholderTextColor={placeholderColor}
-  //             placeholderClassName="text-secondary"
-  //           />
-  //         </View>
-  //         <View className="gap-[.5rem]">
-  //           <Text className="text-primary">Precio</Text>
-  //           <TextInput
-  //             keyboardType="number-pad"
-  //             className="bg-card text-primary rounded-md px-[1rem] py-[.5rem]"
-  //             placeholder="C$ 100"
-  //             placeholderTextColor={placeholderColor}
-  //             placeholderClassName="text-secondary"
-  //           />
-  //         </View>
-  //         <View className="gap-[.5rem]">
-  //           <Text className="text-primary">Dia de la cita</Text>
-  //           <Pressable onPress={() => setOpenCalendar(true)}>
-  //             <TextInput
-  //               className="bg-card text-primary rounded-md px-[1rem] py-[.5rem]"
-  //               value={Intl.DateTimeFormat("es-ES", {
-  //                 weekday: "long",
-  //                 day: "2-digit",
-  //                 month: "long",
-  //                 year: "numeric",
-  //               }).format(new Date())}
-  //               editable={false}
-  //               selectTextOnFocus={false}
-  //               placeholderTextColor={placeholderColor}
-  //               placeholderClassName="text-secondary"
-  //             />
-  //           </Pressable>
-  //         </View>
-  //         <View className="gap-[.5rem]">
-  //           <Text className="text-primary">Hora de la cita</Text>
-  //           <Pressable onPress={() => setOpenClock(true)}>
-  //             <TextInput
-  //               className="bg-card text-primary rounded-md px-[1rem] py-[.5rem]"
-  //               value={Intl.DateTimeFormat("es-ES", {
-  //                 hour: "2-digit",
-  //                 minute: "2-digit",
-  //                 hour12: true,
-  //               }).format(new Date())}
-  //               editable={false}
-  //               selectTextOnFocus={false}
-  //               placeholderTextColor={placeholderColor}
-  //               placeholderClassName="text-secondary"
-  //             />
-  //           </Pressable>
-  //         </View>
-  //       </View>
-  //     </View>
-  //     {openCalendar && (
-  //       <DateTimePicker
-  //         mode="date"
-  //         value={new Date()}
-  //         minimumDate={new Date()}
-  //         onChange={(e) => {
-  //           if (["set", "dismissed", "neutralButtonPressed"].includes(e.type)) {
-  //             setOpenCalendar(false)
-  //           }
-  //         }}
-  //       />
-  //     )}
-  //     {openClock && (
-  //       <DateTimePicker
-  //         mode="time"
-  //         value={new Date()}
-  //         onChange={(e) => {
-  //           if (["set", "dismissed", "neutralButtonPressed"].includes(e.type)) {
-  //             setOpenClock(false)
-  //           }
-  //         }}
-  //       />
-  //     )}
-  //   </>
-  // );
+  
 
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
@@ -173,26 +75,6 @@ const CreateNewAppointment = () => {
   const AnimatedImageBackground =
     Animated.createAnimatedComponent(ImageBackground);
 
-  // const headerAnimatedStyle = useAnimatedStyle(() => {
-  //   return {
-  //     opacity: interpolate(scrollOffset.value, [0, IMG_HEIGHT / 2], [0, 0.6]),
-  //   };
-  // });
-
-  // // Blur
-  // const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
-
-  // const blurIntensity = useAnimatedProps<BlurViewProps>(() => {
-  //   return {
-  //     intensity: interpolate(
-  //       scrollOffset.value,
-  //       [0, IMG_HEIGHT / 2],
-  //       [0, 100],
-  //       Extrapolation.CLAMP
-  //     ),
-  //   };
-  // });
-
   const dates = eachWeekOfInterval(
     {
       start: new Date(),
@@ -211,31 +93,10 @@ const CreateNewAppointment = () => {
   }, []);
 
   const [activeDate, setActiveDate] = useState(startOfToday().toString());
+  const [activeTime, setActivetime] = useState('8:00 am')
 
   return (
     <View className="h-full">
-      {/* <Stack.Screen
-        options={{
-          headerTitle: "Crear Cita",
-          headerTitleAlign: "center",
-          headerBackground: () => (
-            // <Animated.View
-            //   style={[
-            //     { backgroundColor: bgColor, height: 100 },
-            //     headerAnimatedStyle,
-            //   ]}
-            // >
-            // </Animated.View>
-              <AnimatedBlurView
-                animatedProps={blurIntensity}
-                // intensity={100}
-                experimentalBlurMethod={"dimezisBlurView"}
-                tint="dark"
-                style={{ height: 100}}
-              />
-          ),
-        }}
-      /> */}
       <Animated.ScrollView
         ref={scrollRef}
         scrollEventThrottle={16}
@@ -289,11 +150,6 @@ const CreateNewAppointment = () => {
             </View>
           </LinearGradient>
         </AnimatedImageBackground>
-        {/* <Animated.Image
-          source={require("./../assets/barber-banner.png")}
-          className={`w-full`}
-          style={[{ height: IMG_HEIGHT }, imageAnimatedStyle]}
-        /> */}
         {/* Crear Cita */}
         <View className=" bg-theme container rounded-t-2xl -mt-[1rem] ">
           <Text className="text-primary text-[2.5rem] text-center my-[1rem] font-bold">
@@ -351,7 +207,6 @@ const CreateNewAppointment = () => {
               "8:00 am",
               "8:30 am",
               "9:00 am",
-              "8:00 am",
               "9:30 am",
               "10:00 am",
               "10:30 am",
@@ -360,8 +215,8 @@ const CreateNewAppointment = () => {
             ]}
             keyExtractor={(item, i) => i.toString()}
             renderItem={({ item }: { item: string }) => (
-              <Pressable className=" bg-card py-[1rem] flex-1 rounded-xl">
-                <Text className=" text-primary font-bold text-center">
+              <Pressable className={`py-[1rem] flex-1 rounded-xl ${activeTime == item ? 'bg-[#d3fd55]' : 'bg-card'}`} onPress={() =>{setActivetime(item)}}>
+                <Text className={`font-bold text-center ${activeTime == item ? 'text-primary-light-text' : 'text-primary '}`}>
                   {item}
                 </Text>
               </Pressable>
