@@ -104,7 +104,7 @@ const CreateNewAppointment = () => {
   const [activeTime, setActivetime] = useState("8:00 am");
 
   return (
-    <GestureHandlerRootView style={{ flex: 1, backgroundColor: "green" }}>
+    <GestureHandlerRootView style={{  }}>
       <View className="h-full">
         <Animated.ScrollView
           ref={scrollRef}
